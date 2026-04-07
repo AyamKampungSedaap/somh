@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karaoke Cute 💙</title>
+<title>Shape Of My Heart 💙</title>
+
+<!-- FONT CANTIK -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -12,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(to top, #aee1ff, #d0f0ff);
     overflow: hidden;
 }
@@ -39,7 +40,8 @@ body {
 }
 
 h1 {
-    color: #4aa3df;
+    color: #333;
+    font-family: 'Pacifico', cursive;
 }
 
 .lyrics {
@@ -48,18 +50,20 @@ h1 {
     height: 400px;
     overflow-y: auto;
     text-align: left;
+    color: #222;
 }
 
 .line {
     opacity: 0;
     animation: fadeLine 1s forwards;
-    color: #0077ff;
-    text-shadow: 0 0 15px #9ed8ff;
+    color: #222;
+    text-shadow: none;
     margin: 15px 0;
     padding: 10px;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.6);
     border-radius: 10px;
     display: block;
+    border-left: 4px solid #aee1ff;
 }
 
 @keyframes fadeLine {
@@ -79,9 +83,6 @@ button {
 }
 </style>
 </head>
-
-<body>
-
 <div class="container">
 <h1>💙 Shape of My Heart 💙</h1>
 
