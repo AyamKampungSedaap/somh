@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karaoke Cute 💙</title>
+<title>Shape of My Heart 💙 Karaoke</title>
 
 <style>
 body {
@@ -40,6 +40,7 @@ body {
 
 h1 {
     color: #4aa3df;
+    font-size: 2em;
 }
 
 .lyrics {
@@ -77,6 +78,10 @@ button {
     cursor: pointer;
     font-size: 18px;
 }
+
+button:hover {
+    background: #3a8bc8;
+}
 </style>
 </head>
 
@@ -84,18 +89,20 @@ button {
 
 <div class="container">
 <h1>💙 Shape of My Heart 💙</h1>
+<h2>Sting</h2>
 
 <div class="lyrics" id="lyrics"></div>
 
 <button onclick="playSong()">▶️ Mulai Karaoke</button>
 
+<!-- LAGU KAMU UDAH MASUK! -->
 <audio id="audio" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+    <source src="https://drive.google.com/uc?export=download&id=1wrS7fAvp-XgSFygZ3QBTtRFeUrZ5Ixt7">
 </audio>
 </div>
 
 <script>
-// LIRIK PER KALIMAT EXACT SESUAI PERMINTAAN
+// LIRIK EXACT 8 KALIMAT
 const lines = [
     "I'm lookin' back on things I've done",
     "I never wanna play the same old part",
@@ -114,10 +121,8 @@ function playSong() {
     audio.currentTime = 0;
     audio.play();
 
-    // CLEAR
     lyricsDiv.innerHTML = "";
 
-    // TIMING PER KALIMAT (4 detik/kalimat)
     lines.forEach((line, index) => {
         setTimeout(() => {
             const div = document.createElement("div");
@@ -125,7 +130,7 @@ function playSong() {
             div.classList.add("line");
             lyricsDiv.appendChild(div);
             lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
-        }, index * 4000); // 4 detik per kalimat
+        }, index * 4500); // 4.5 detik per kalimat
     });
 }
 
