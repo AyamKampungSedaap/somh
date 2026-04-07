@@ -111,6 +111,18 @@ const lines = [
 
 const lyricsDiv = document.getElementById("lyrics");
 
+// durasi tiap kalimat (ms)
+const durations = [
+    5000, // I'm lookin' back on things I've done
+    5000, // I never wanna play the same old part
+    6000, // I'll keep you in the dark (keep you in the dark)
+    5000, // Now let me show you the shape of my heart
+    5000, // Looking back on the things I've done
+    6000, //I was trying to be someone (trying to be someone)
+    5000, // I played my part, kept you in the dark
+    7000 // Now let me show you the shape of my heart (now let me show you the shape of my heart)
+];
+
 function playSong() {
     const audio = document.getElementById("audio");
     audio.currentTime = 0;
@@ -119,7 +131,7 @@ function playSong() {
     // CLEAR
     lyricsDiv.innerHTML = "";
 
-    const introDelay = 2730; // ⬅️ delay intro 1.5 detik
+    let totalTime = 2730; // ⬅️ intro delay (2.73 detik)
 
     lines.forEach((line, index) => {
         setTimeout(() => {
@@ -128,7 +140,9 @@ function playSong() {
             div.classList.add("line");
             lyricsDiv.appendChild(div);
             lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
-        }, introDelay + (index * 4000)); // ⬅️ ditambah delay
+        }, totalTime);
+
+        totalTime += durations[index]; // ⬅️ ini yang bikin beda tiap kalimat
     });
 }
 
