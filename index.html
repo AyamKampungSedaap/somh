@@ -75,7 +75,7 @@ button {
 <body>
 
 <div class="container">
-<h1>💙 For You 💙</h1>
+<h1>💙 Shape of My Heart 💙</h1>
 
 <div class="lyrics" id="lyrics"></div>
 
@@ -87,15 +87,19 @@ button {
 </div>
 
 <script>
-// lirik per kata
-const text = "I'm looking back on things I've done I never wanna play the same old part";
+// SEMUA LIRIK SESUAI PERMINTAAN
+const text = "I'm lookin' back on things I've done I never wanna play the same old part I'll keep you in the dark keep you in the dark Now let me show you the shape of my heart Looking back on the things I've done I was trying to be someone trying to be someone I played my part kept you in the dark Now let me show you the shape of my heart now let me show you the shape of my heart";
 const words = text.split(" ");
 
 const lyricsDiv = document.getElementById("lyrics");
 
-// timing per kata (atur sesuai lagu)
+// TIMING SESUAI RITME LAGU (per kata)
 const timing = [
-0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7
+0.0,0.4,0.9,1.4,2.0,2.6,3.1,3.6,4.1,4.7,5.2,5.7,6.2,6.7,7.2,
+7.7,8.2,8.7,9.2,9.7,10.2,10.7,11.2,11.7,12.2,12.7,13.2,13.7,14.2,
+14.7,15.2,15.7,16.2,16.7,17.2,17.7,18.2,18.7,19.2,19.7,20.2,
+20.7,21.2,21.7,22.2,22.7,23.2,23.7,24.2,24.7,25.2,25.7,26.2,
+26.7,27.2,27.7,28.2,28.7,29.2,29.7,30.2,30.7,31.2,31.7,32.2
 ];
 
 function playSong() {
