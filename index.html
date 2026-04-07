@@ -119,7 +119,8 @@ function playSong() {
     // CLEAR
     lyricsDiv.innerHTML = "";
 
-    // TIMING PER KALIMAT (4 detik/kalimat)
+    const introDelay = 1500; // ⬅️ delay intro 1.5 detik
+
     lines.forEach((line, index) => {
         setTimeout(() => {
             const div = document.createElement("div");
@@ -127,7 +128,7 @@ function playSong() {
             div.classList.add("line");
             lyricsDiv.appendChild(div);
             lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
-        }, index * 4000); // 4 detik per kalimat
+        }, introDelay + (index * 4000)); // ⬅️ ditambah delay
     });
 }
 
