@@ -17,7 +17,6 @@ body {
     overflow: hidden;
 }
 
-/* floating hearts */
 .heart {
     position: absolute;
     color: #6ec6ff;
@@ -44,30 +43,39 @@ h1 {
 }
 
 .lyrics {
-    font-size: 1.5em;
-    line-height: 2;
+    font-size: 1.8em;
+    line-height: 1.6;
+    height: 400px;
+    overflow-y: auto;
+    text-align: left;
 }
 
-/* kata muncul animasi */
-.word {
+.line {
     opacity: 0;
-    animation: fadeWord 0.4s forwards;
+    animation: fadeLine 1s forwards;
     color: #0077ff;
-    text-shadow: 0 0 10px #9ed8ff;
+    text-shadow: 0 0 15px #9ed8ff;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 10px;
+    display: block;
 }
 
-@keyframes fadeWord {
-    to { opacity: 1; }
+@keyframes fadeLine {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 button {
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 15px 30px;
     border: none;
     border-radius: 10px;
     background: #4aa3df;
     color: white;
     cursor: pointer;
+    font-size: 18px;
 }
 </style>
 </head>
@@ -79,50 +87,49 @@ button {
 
 <div class="lyrics" id="lyrics"></div>
 
-<button onclick="playSong()">Play 💙</button>
+<button onclick="playSong()">▶️ Mulai Karaoke</button>
 
-<audio id="audio">
+<audio id="audio" loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 </div>
 
 <script>
-// SEMUA LIRIK SESUAI PERMINTAAN
-const text = "I'm lookin' back on things I've done I never wanna play the same old part I'll keep you in the dark keep you in the dark Now let me show you the shape of my heart Looking back on the things I've done I was trying to be someone trying to be someone I played my part kept you in the dark Now let me show you the shape of my heart now let me show you the shape of my heart";
-const words = text.split(" ");
+// LIRIK PER KALIMAT EXACT SESUAI PERMINTAAN
+const lines = [
+    "I'm lookin' back on things I've done",
+    "I never wanna play the same old part",
+    "I'll keep you in the dark (keep you in the dark)",
+    "Now let me show you the shape of my heart",
+    "Looking back on the things I've done",
+    "I was trying to be someone (trying to be someone)",
+    "I played my part, kept you in the dark",
+    "Now let me show you the shape of my heart (now let me show you the shape of my heart)"
+];
 
 const lyricsDiv = document.getElementById("lyrics");
-
-// TIMING SESUAI RITME LAGU (per kata)
-const timing = [
-0.0,0.4,0.9,1.4,2.0,2.6,3.1,3.6,4.1,4.7,5.2,5.7,6.2,6.7,7.2,
-7.7,8.2,8.7,9.2,9.7,10.2,10.7,11.2,11.7,12.2,12.7,13.2,13.7,14.2,
-14.7,15.2,15.7,16.2,16.7,17.2,17.7,18.2,18.7,19.2,19.7,20.2,
-20.7,21.2,21.7,22.2,22.7,23.2,23.7,24.2,24.7,25.2,25.7,26.2,
-26.7,27.2,27.7,28.2,28.7,29.2,29.7,30.2,30.7,31.2,31.7,32.2
-];
 
 function playSong() {
     const audio = document.getElementById("audio");
     audio.currentTime = 0;
     audio.play();
 
-    // kosongin dulu
+    // CLEAR
     lyricsDiv.innerHTML = "";
 
-    timing.forEach((t, i) => {
+    // TIMING PER KALIMAT (4 detik/kalimat)
+    lines.forEach((line, index) => {
         setTimeout(() => {
-            if(words[i]) {
-                const span = document.createElement("span");
-                span.innerText = words[i] + " ";
-                span.classList.add("word");
-                lyricsDiv.appendChild(span);
-            }
-        }, t * 1000);
+            const div = document.createElement("div");
+            div.innerText = line;
+            div.classList.add("line");
+            lyricsDiv.appendChild(div);
+            lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
+        }, index * 4000); // 4 detik per kalimat
     });
 }
 
-// generate hearts
+// HEARTS
 setInterval(() => {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -130,7 +137,6 @@ setInterval(() => {
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = (Math.random() * 20 + 10) + "px";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 6000);
 }, 500);
 </script>
