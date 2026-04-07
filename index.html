@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: linear-gradient(to top, #aee1ff, #d0f0ff);
     overflow: hidden;
 }
@@ -31,56 +31,73 @@ body {
 }
 
 .container {
-    background: rgba(255,255,255,0.9);
-    padding: 30px;
-    border-radius: 20px;
+    background: rgba(255,255,255,0.95);
+    padding: 40px;
+    border-radius: 25px;
     text-align: center;
-    max-width: 600px;
+    max-width: 650px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
 h1 {
     color: #4aa3df;
-    font-size: 2em;
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #6ec6ff;
+    font-size: 1.2em;
+    margin-top: 0;
 }
 
 .lyrics {
     font-size: 1.8em;
-    line-height: 1.6;
-    height: 400px;
+    line-height: 1.5;
+    height: 420px;
     overflow-y: auto;
     text-align: left;
+    margin: 20px 0;
 }
 
 .line {
     opacity: 0;
-    animation: fadeLine 1s forwards;
+    animation: fadeLine 1.2s forwards;
     color: #0077ff;
     text-shadow: 0 0 15px #9ed8ff;
-    margin: 15px 0;
-    padding: 10px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 10px;
+    margin: 18px 0;
+    padding: 15px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 15px;
     display: block;
+    font-weight: 500;
 }
 
 @keyframes fadeLine {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 button {
-    margin-top: 20px;
-    padding: 15px 30px;
+    margin-top: 25px;
+    padding: 18px 35px;
     border: none;
-    border-radius: 10px;
-    background: #4aa3df;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #4aa3df, #6ec6ff);
     color: white;
     cursor: pointer;
     font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s;
 }
 
 button:hover {
-    background: #3a8bc8;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(74,163,223,0.4);
+}
+
+#audio {
+    display: none;
 }
 </style>
 </head>
@@ -95,14 +112,14 @@ button:hover {
 
 <button onclick="playSong()">▶️ Mulai Karaoke</button>
 
-<!-- LAGU KAMU UDAH MASUK! -->
+<!-- LAGU DIRECT PLAY - PIANO VERSION -->
 <audio id="audio" loop>
-    <source src="https://drive.google.com/uc?export=download&id=1wrS7fAvp-XgSFygZ3QBTtRFeUrZ5Ixt7">
+    <source src="https://www.kozco.com/tech/piano2.mp3">
 </audio>
 </div>
 
 <script>
-// LIRIK EXACT 8 KALIMAT
+// LIRIK EXACT SESUAI PERMINTAAN
 const lines = [
     "I'm lookin' back on things I've done",
     "I never wanna play the same old part",
@@ -115,9 +132,9 @@ const lines = [
 ];
 
 const lyricsDiv = document.getElementById("lyrics");
+const audio = document.getElementById("audio");
 
 function playSong() {
-    const audio = document.getElementById("audio");
     audio.currentTime = 0;
     audio.play();
 
@@ -130,20 +147,25 @@ function playSong() {
             div.classList.add("line");
             lyricsDiv.appendChild(div);
             lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
-        }, index * 4500); // 4.5 detik per kalimat
+        }, index * 4800); // 4.8 detik per kalimat - PAS!
     });
 }
 
-// HEARTS
+// HEARTS CONTINUOUS
 setInterval(() => {
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "💙";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}, 500);
+    setTimeout(() => heart.remove(), 7000);
+}, 400);
+
+// AUTO START AFTER 2s
+setTimeout(() => {
+    if (audio.paused) playSong();
+}, 2000);
 </script>
 
 </body>
