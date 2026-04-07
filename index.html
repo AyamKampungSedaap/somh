@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shape of My Heart 💙 Karaoke</title>
+<title>Karaoke Cute 💙</title>
 
 <style>
 body {
@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     background: linear-gradient(to top, #aee1ff, #d0f0ff);
     overflow: hidden;
 }
@@ -31,73 +31,51 @@ body {
 }
 
 .container {
-    background: rgba(255,255,255,0.95);
-    padding: 40px;
-    border-radius: 25px;
+    background: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 20px;
     text-align: center;
-    max-width: 650px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    max-width: 600px;
 }
 
 h1 {
     color: #4aa3df;
-    font-size: 2.2em;
-    margin-bottom: 10px;
-}
-
-h2 {
-    color: #6ec6ff;
-    font-size: 1.2em;
-    margin-top: 0;
 }
 
 .lyrics {
     font-size: 1.8em;
-    line-height: 1.5;
-    height: 420px;
+    line-height: 1.6;
+    height: 400px;
     overflow-y: auto;
     text-align: left;
-    margin: 20px 0;
 }
 
 .line {
     opacity: 0;
-    animation: fadeLine 1.2s forwards;
+    animation: fadeLine 1s forwards;
     color: #0077ff;
     text-shadow: 0 0 15px #9ed8ff;
-    margin: 18px 0;
-    padding: 15px;
-    background: rgba(255,255,255,0.6);
-    border-radius: 15px;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 10px;
     display: block;
-    font-weight: 500;
 }
 
 @keyframes fadeLine {
-    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 button {
-    margin-top: 25px;
-    padding: 18px 35px;
+    margin-top: 20px;
+    padding: 15px 30px;
     border: none;
-    border-radius: 15px;
-    background: linear-gradient(45deg, #4aa3df, #6ec6ff);
+    border-radius: 10px;
+    background: #4aa3df;
     color: white;
     cursor: pointer;
     font-size: 18px;
-    font-weight: bold;
-    transition: all 0.3s;
-}
-
-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(74,163,223,0.4);
-}
-
-#audio {
-    display: none;
 }
 </style>
 </head>
@@ -106,20 +84,20 @@ button:hover {
 
 <div class="container">
 <h1>💙 Shape of My Heart 💙</h1>
-<h2>Sting</h2>
 
 <div class="lyrics" id="lyrics"></div>
 
 <button onclick="playSong()">▶️ Mulai Karaoke</button>
 
-<!-- LAGU DIRECT PLAY - PIANO VERSION -->
-<audio id="audio" loop>
-    <source src="https://www.kozco.com/tech/piano2.mp3">
+<!-- PAKAI FILE LU -->
+<audio id="audio">
+    <source src="somh cut.mp3" type="audio/mpeg">
 </audio>
+
 </div>
 
 <script>
-// LIRIK EXACT SESUAI PERMINTAAN
+// LIRIK
 const lines = [
     "I'm lookin' back on things I've done",
     "I never wanna play the same old part",
@@ -132,14 +110,16 @@ const lines = [
 ];
 
 const lyricsDiv = document.getElementById("lyrics");
-const audio = document.getElementById("audio");
 
 function playSong() {
+    const audio = document.getElementById("audio");
     audio.currentTime = 0;
     audio.play();
 
+    // CLEAR
     lyricsDiv.innerHTML = "";
 
+    // TIMING PER KALIMAT (4 detik/kalimat)
     lines.forEach((line, index) => {
         setTimeout(() => {
             const div = document.createElement("div");
@@ -147,25 +127,20 @@ function playSong() {
             div.classList.add("line");
             lyricsDiv.appendChild(div);
             lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
-        }, index * 4800); // 4.8 detik per kalimat - PAS!
+        }, index * 4000); // 4 detik per kalimat
     });
 }
 
-// HEARTS CONTINUOUS
+// HEARTS
 setInterval(() => {
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "💙";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 7000);
-}, 400);
-
-// AUTO START AFTER 2s
-setTimeout(() => {
-    if (audio.paused) playSong();
-}, 2000);
+    setTimeout(() => heart.remove(), 6000);
+}, 500);
 </script>
 
 </body>
